@@ -1,3 +1,5 @@
+import sys
+import logging
 import argparse
 import torch
 import torch.nn as nn
@@ -13,6 +15,7 @@ from torch.hub import tqdm
 #################
 
 from nirvana_utils import copy_snapshot_to_out, copy_out_to_snapshot
+
 
 
 class PatchExtractor(nn.Module):
@@ -251,6 +254,12 @@ def main():
     parser.add_argument('--dry-run', action='store_true', default=False,
                         help='quickly check a single pass')
     args = parser.parse_args()
+
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+    logger = logging.getLogger()
+    for i in range(100):
+        logger.info(f"I am counting to 100: {i}")
+
    
     #############
     # IMPORTANT #
